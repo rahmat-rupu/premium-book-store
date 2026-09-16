@@ -1,0 +1,759 @@
+/* =========================================
+   1. Base & Top Bar
+========================================= */
+.container {
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+.top-bar {
+  background-color: var(--primary-red);
+  color: var(--bg-surface);
+  font-size: 13px;
+  padding: 10px 0;
+  font-weight: 500;
+}
+.top-bar-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.contact-info span {
+  margin-right: 24px;
+}
+.contact-info i,
+.offer-text i {
+  margin-right: 8px;
+  color: var(--accent-gold);
+}
+
+/* =========================================
+   2. Glassmorphism Navbar
+========================================= */
+.navbar {
+  background-color: var(--bg-glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: var(--shadow-sm);
+  padding: 18px 0;
+}
+.nav-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+}
+
+/* Logo */
+.brand-logo {
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+}
+.logo-text {
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--text-dark);
+  line-height: 1;
+}
+.logo-text .highlight {
+  color: var(--primary-red);
+}
+.slogan-micro {
+  font-size: 12px;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+  margin-top: 4px;
+}
+
+/* Advanced Search Bar */
+.search-container {
+  flex-grow: 1;
+  max-width: 700px;
+}
+.search-form {
+  display: flex;
+  align-items: center;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: 8px; /* Professional square-rounded look */
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.02);
+  transition: var(--transition);
+}
+.search-form:focus-within {
+  border-color: var(--accent-gold);
+  box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.1);
+}
+.search-category {
+  position: relative;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+}
+.category-select {
+  appearance: none;
+  background: transparent;
+  border: none;
+  font-family: inherit;
+  font-size: 14px;
+  color: var(--text-muted);
+  padding-right: 20px;
+  outline: none;
+  cursor: pointer;
+}
+.dropdown-icon {
+  position: absolute;
+  right: 16px;
+  font-size: 12px;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+.search-divider {
+  width: 1px;
+  height: 24px;
+  background-color: var(--border-color);
+}
+.search-input {
+  flex-grow: 1;
+  padding: 14px 20px;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-family: inherit;
+  font-size: 15px;
+}
+.search-btn {
+  padding: 0 24px;
+  background: var(--primary-red);
+  border: none;
+  border-radius: 0 8px 8px 0;
+  color: var(--bg-surface);
+  cursor: pointer;
+  align-self: stretch;
+  transition: var(--transition);
+}
+.search-btn:hover {
+  background: var(--primary-red-hover);
+}
+
+/* Nav Actions */
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+.action-icon {
+  position: relative;
+  color: var(--text-dark);
+  font-size: 22px;
+  text-decoration: none;
+  transition: var(--transition);
+}
+.action-icon:hover {
+  color: var(--primary-red);
+}
+.cart-badge {
+  position: absolute;
+  top: -8px;
+  right: -12px;
+  background-color: var(--accent-gold);
+  color: var(--bg-surface);
+  font-size: 11px;
+  font-weight: 700;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* =========================================
+   3. Ultra-Premium Hero Section
+========================================= */
+.hero-section {
+  position: relative;
+  padding: 100px 0;
+  overflow: hidden;
+  background-color: var(--bg-main);
+}
+/* Abstract Background Glows */
+.bg-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(120px);
+  z-index: 0;
+}
+.glow-1 {
+  width: 500px;
+  height: 500px;
+  background: rgba(212, 175, 55, 0.15);
+  top: -100px;
+  right: -100px;
+}
+.glow-2 {
+  width: 400px;
+  height: 400px;
+  background: rgba(139, 21, 56, 0.1);
+  bottom: -50px;
+  left: -100px;
+}
+
+.hero-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 60px;
+  position: relative;
+  z-index: 1;
+}
+
+/* Hero Text */
+.hero-text-content {
+  flex: 1;
+  max-width: 620px;
+}
+.badge {
+  display: inline-block;
+  background-color: var(--bg-surface);
+  color: var(--primary-red);
+  padding: 8px 16px;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 24px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border-color);
+}
+.badge i {
+  color: var(--accent-gold);
+  margin-right: 6px;
+}
+.hero-title {
+  font-size: 56px;
+  line-height: 1.15;
+  color: var(--text-dark);
+  margin-bottom: 24px;
+  font-weight: 700;
+}
+.highlight-text {
+  color: var(--primary-red);
+}
+.hero-subtitle {
+  font-size: 18px;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 40px;
+}
+
+/* Buttons */
+.hero-buttons {
+  display: flex;
+  gap: 16px;
+  margin-bottom: 40px;
+}
+.btn {
+  padding: 14px 32px;
+  border-radius: 8px;
+  font-weight: 600;
+  text-decoration: none;
+  font-size: 16px;
+  transition: var(--transition);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+.btn-small {
+  padding: 10px 24px;
+}
+.btn-primary {
+  background-color: var(--primary-red);
+  color: var(--bg-surface);
+  box-shadow: 0 4px 15px rgba(139, 21, 56, 0.25);
+}
+.btn-primary:hover {
+  background-color: var(--primary-red-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(139, 21, 56, 0.35);
+}
+.btn-outline {
+  background-color: var(--bg-surface);
+  color: var(--text-dark);
+  border: 1px solid var(--border-color);
+}
+.btn-outline:hover {
+  border-color: var(--text-dark);
+}
+
+/* Trust Badges */
+.trust-badges {
+  display: flex;
+  gap: 32px;
+  border-top: 1px solid var(--border-color);
+  padding-top: 24px;
+}
+.trust-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--text-muted);
+  font-size: 15px;
+  font-weight: 500;
+}
+.trust-item i {
+  font-size: 20px;
+  color: var(--primary-red);
+}
+
+/* Hero Floating Image / Banner */
+.hero-image-content {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+}
+.floating-wrapper {
+  position: relative;
+  animation: float 6s ease-in-out infinite;
+}
+/* Glassmorphism Card Effect */
+.glass-card {
+  background: linear-gradient(
+    135deg,
+    rgba(139, 21, 56, 0.95),
+    rgba(74, 4, 31, 0.95)
+  );
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: var(--shadow-glass);
+}
+.hero-banner-card {
+  width: 440px;
+  height: 440px;
+  border-radius: 40px; /* Modern squircle shape instead of perfect circle */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transform: rotate(2deg);
+  transition: var(--transition);
+}
+.hero-banner-card:hover {
+  transform: rotate(0deg) scale(1.02);
+}
+.banner-inner {
+  text-align: center;
+  color: var(--bg-surface);
+}
+.banner-inner h2 {
+  font-size: 120px;
+  line-height: 0.9;
+  color: var(--accent-gold);
+  text-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+.banner-inner .small-text {
+  font-size: 40px;
+}
+.banner-inner h3 {
+  font-size: 28px;
+  font-weight: 600;
+  margin-top: 10px;
+  letter-spacing: 1px;
+}
+.banner-inner p {
+  font-size: 16px;
+  opacity: 0.9;
+  margin-top: 10px;
+}
+
+/* Floating Elements */
+.floating-badge {
+  position: absolute;
+  background: var(--bg-surface);
+  color: var(--text-dark);
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-weight: 600;
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-color);
+}
+.badge-top {
+  top: -20px;
+  left: -30px;
+  animation: float 4s ease-in-out infinite alternate;
+}
+.badge-bottom {
+  bottom: 30px;
+  right: -40px;
+  animation: float 5s ease-in-out infinite alternate-reverse;
+}
+
+/* Floating Animation Keyframes */
+@keyframes float {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+/* =========================================
+   4. Reusable Sections & Book Grid
+========================================= */
+.section-padding {
+  padding: 80px 0;
+}
+.bg-light {
+  background-color: var(--bg-main); /* Ensure smooth transition from hero */
+}
+
+/* Section Header */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 40px;
+}
+.sub-heading {
+  display: inline-block;
+  color: var(--accent-gold);
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 8px;
+}
+.section-title {
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+/* CSS Grid for Books */
+.book-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 32px;
+}
+
+/* Premium Book Card */
+.book-card {
+  background-color: var(--bg-surface);
+  border-radius: 16px;
+  border: 1px solid var(--border-color);
+  overflow: hidden;
+  transition: var(--transition);
+  display: flex;
+  flex-direction: column;
+}
+.book-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-md);
+  border-color: rgba(139, 21, 56, 0.1);
+}
+
+/* Book Image & Hover Actions */
+.book-image-wrapper {
+  position: relative;
+  aspect-ratio: 2/3;
+  overflow: hidden;
+  background-color: var(--bg-light-gray);
+}
+.book-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+.book-card:hover .book-cover {
+  transform: scale(1.05); /* Slight zoom on hover */
+}
+.discount-badge {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background-color: var(--primary-red);
+  color: var(--bg-surface);
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  z-index: 2;
+  box-shadow: 0 4px 10px rgba(139, 21, 56, 0.3);
+}
+
+/* Action Buttons overlaying the image */
+.hover-actions {
+  position: absolute;
+  bottom: -50px;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  padding: 16px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.7), transparent);
+  transition: var(--transition);
+  opacity: 0;
+  z-index: 2;
+}
+.book-card:hover .hover-actions {
+  bottom: 0;
+  opacity: 1;
+}
+.icon-btn {
+  background-color: var(--bg-surface);
+  color: var(--text-dark);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+.icon-btn:hover {
+  background-color: var(--primary-red);
+  color: var(--bg-surface);
+  transform: translateY(-3px);
+}
+
+/* Book Info Section */
+.book-info {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+.book-category {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+.book-title {
+  font-size: 18px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  line-height: 1.3;
+}
+.book-title a {
+  text-decoration: none;
+  color: var(--text-dark);
+  transition: var(--transition);
+}
+.book-title a:hover {
+  color: var(--primary-red);
+}
+.book-author {
+  font-size: 14px;
+  color: var(--text-muted);
+  margin-bottom: 12px;
+}
+
+/* Ratings */
+.book-rating {
+  color: var(--accent-gold);
+  font-size: 13px;
+  margin-bottom: 16px;
+}
+.book-rating span {
+  color: var(--text-muted);
+  margin-left: 4px;
+}
+
+/* Price */
+.price-container {
+  margin-top: auto; /* Pushes price to the bottom if title is short */
+  margin-bottom: 16px;
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+.current-price {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--primary-red);
+}
+.old-price {
+  font-size: 15px;
+  color: var(--text-muted);
+  text-decoration: line-through;
+}
+
+/* Add to cart button specifically for book cards */
+.add-to-cart-btn {
+  width: 100%;
+  justify-content: center;
+  border-radius: 8px;
+  padding: 12px;
+  background-color: transparent;
+  color: var(--primary-red);
+  box-shadow: none;
+  border: 1px solid var(--primary-red);
+}
+.add-to-cart-btn:hover {
+  background-color: var(--primary-red);
+  color: var(--bg-surface);
+  box-shadow: 0 4px 12px rgba(139, 21, 56, 0.2);
+}
+
+/* =========================================
+   5. Dark Premium Section (Trending)
+========================================= */
+.premium-dark-section {
+  background-color: var(--text-dark);
+  background-image:
+    radial-gradient(
+      circle at 100% 0%,
+      rgba(139, 21, 56, 0.15) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 0% 100%,
+      rgba(212, 175, 55, 0.1) 0%,
+      transparent 50%
+    );
+  border-top: 1px solid rgba(212, 175, 55, 0.2);
+  border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+}
+
+/* Dark Theme Text Helpers */
+.text-white {
+  color: var(--bg-surface) !important;
+}
+.text-gold {
+  color: var(--accent-gold) !important;
+}
+.text-gray {
+  color: #9ca3af !important;
+}
+
+/* Gold Outline Button */
+.btn-outline-gold {
+  background-color: transparent;
+  color: var(--accent-gold);
+  border: 1px solid var(--accent-gold);
+}
+.btn-outline-gold:hover {
+  background-color: var(--accent-gold);
+  color: var(--text-dark);
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+}
+
+/* Trending Grid Layout */
+.trending-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+  gap: 32px;
+}
+
+/* Dark Glassmorphism Horizontal Card */
+.dark-glass-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  position: relative;
+  overflow: hidden;
+  transition: var(--transition);
+}
+.dark-glass-card:hover {
+  transform: translateY(-5px);
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(212, 175, 55, 0.3);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* Giant Background Watermark Number */
+.rank-watermark {
+  position: absolute;
+  right: 20px;
+  bottom: -20px;
+  font-size: 160px;
+  font-weight: 800;
+  line-height: 1;
+  color: rgba(212, 175, 55, 0.05); /* Extremely subtle gold */
+  z-index: 0;
+  pointer-events: none;
+  transition: var(--transition);
+}
+.dark-glass-card:hover .rank-watermark {
+  color: rgba(212, 175, 55, 0.12);
+  transform: scale(1.1) rotate(-5deg);
+}
+
+/* Image Wrapper */
+.trend-img-wrapper {
+  position: relative;
+  width: 140px;
+  flex-shrink: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.6);
+  z-index: 1;
+}
+.trend-cover {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform 0.4s ease;
+}
+.dark-glass-card:hover .trend-cover {
+  transform: scale(1.05);
+}
+
+/* Number 1 Crown Badge */
+.trend-badge {
+  position: absolute;
+  top: 10px;
+  left: -5px;
+  background: linear-gradient(135deg, #d4af37, #c5a028);
+  color: var(--text-dark);
+  padding: 4px 12px;
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 0 8px 8px 0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+/* Info Section */
+.trend-info {
+  position: relative;
+  z-index: 1;
+  flex-grow: 1;
+}
+.trend-info .book-title a {
+  text-decoration: none;
+  color: var(--accent-gold);
+  transition: var(--transition);
+}
+.trend-info .book-title a:hover {
+  color: var(--accent-gold) !important;
+}
+.trend-info .price-container {
+  margin-top: 12px;
+  margin-bottom: 16px;
+}
+.trend-buy-btn {
+  width: 100%;
+  padding: 10px;
+  font-size: 14px;
+}
