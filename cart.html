@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="bn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shopping Cart - বইমই</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <link rel="stylesheet" href="css/variables.css" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body class="bg-main">
+    <!-- Glassmorphism Navbar (Simplified for Cart Page) -->
+    <header class="navbar">
+      <div class="container nav-content">
+        <a href="index.html" class="brand-logo">
+          <span class="logo-text">বই<span class="highlight">মই</span></span>
+        </a>
+        <div class="nav-actions">
+          <a href="index.html" class="btn btn-outline-primary btn-small"
+            ><i class="fa-solid fa-arrow-left"></i> Continue Shopping</a
+          >
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Cart Section -->
+    <main class="section-padding">
+      <div class="container">
+        <div class="cart-header">
+          <h1 class="section-title">
+            Your <span class="highlight-text">Cart</span>
+          </h1>
+          <span class="cart-count-badge">2 Items</span>
+        </div>
+
+        <div class="cart-layout">
+          <!-- Left Side: Cart Items List -->
+          <div class="cart-items-container">
+            <!-- Cart Item 1 -->
+            <div class="cart-item">
+              <img
+                src="https://via.placeholder.com/100x150/e5e7eb/6b7280?text=Book+1"
+                alt="Book"
+                class="cart-item-img"
+              />
+
+              <div class="cart-item-details">
+                <div class="cart-item-category">থ্রিলার</div>
+                <h3 class="cart-item-title">
+                  <a href="details.html">অন্ধকারের উৎসতে</a>
+                </h3>
+                <p class="cart-item-author">মোহাম্মদ নাজিম উদ্দিন</p>
+              </div>
+
+              <div class="cart-item-actions">
+                <div class="quantity-selector cart-qty">
+                  <button class="qty-btn minus-btn">
+                    <i class="fa-solid fa-minus"></i>
+                  </button>
+                  <input type="number" value="1" min="1" class="qty-input" />
+                  <button class="qty-btn plus-btn">
+                    <i class="fa-solid fa-plus"></i>
+                  </button>
+                </div>
+                <div class="cart-item-price">৳৪৫০</div>
+                <button class="remove-item-btn" title="Remove Item">
+                  <i class="fa-solid fa-trash-can"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- Cart Item 2 -->
+            <div class="cart-item">
+              <img
+                src="https://via.placeholder.com/100x150/e5e7eb/6b7280?text=Book+2"
+                alt="Book"
+                class="cart-item-img"
+              />
+
+              <div class="cart-item-details">
+                <div class="cart-item-category">ক্লাসিক</div>
+                <h3 class="cart-item-title">
+                  <a href="#">জনপ্রিয় ক্লাসিক সিরিজ</a>
+                </h3>
+                <p class="cart-item-author">বিভূতিভূষণ ও অন্যান্য</p>
+              </div>
+
+              <div class="cart-item-actions">
+                <div class="quantity-selector cart-qty">
+                  <button class="qty-btn minus-btn">
+                    <i class="fa-solid fa-minus"></i>
+                  </button>
+                  <input type="number" value="1" min="1" class="qty-input" />
+                  <button class="qty-btn plus-btn">
+                    <i class="fa-solid fa-plus"></i>
+                  </button>
+                </div>
+                <div class="cart-item-price">৳৯৯৯</div>
+                <button class="remove-item-btn" title="Remove Item">
+                  <i class="fa-solid fa-trash-can"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Side: Order Summary -->
+          <div class="order-summary-container">
+            <h3 class="summary-title">Order Summary</h3>
+
+            <div class="summary-row">
+              <span>Subtotal (2 Items)</span>
+              <span>৳১৪৪৯</span>
+            </div>
+            <div class="summary-row">
+              <span>Standard Shipping</span>
+              <span>৳৬০</span>
+            </div>
+
+            <!-- Promo Code Box -->
+            <div class="promo-code-box">
+              <input
+                type="text"
+                placeholder="Enter Promo Code"
+                class="promo-input"
+              />
+              <button class="btn btn-primary promo-btn">Apply</button>
+            </div>
+
+            <div class="summary-divider"></div>
+
+            <div class="summary-row total-row">
+              <span>Total</span>
+              <span class="text-gold">৳১৫০৯</span>
+            </div>
+
+            <a href="checkout.html" class="btn btn-primary checkout-btn">
+              Proceed to Checkout <i class="fa-solid fa-lock"></i>
+            </a>
+
+            <div class="secure-checkout-note">
+              <i class="fa-solid fa-shield-halved"></i> Secure Encrypted
+              Checkout
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- JS Link -->
+    <script src="js/main.js"></script>
+  </body>
+</html>

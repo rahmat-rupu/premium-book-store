@@ -1,0 +1,439 @@
+<!doctype html>
+<html lang="bn">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Secure Checkout - বইমই</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <link rel="stylesheet" href="css/variables.css" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body class="bg-main">
+    <header class="navbar" style="border-bottom: 1px solid var(--border-color)">
+      <div class="container nav-content">
+        <a href="index.html" class="brand-logo">
+          <span class="logo-text">বই<span class="highlight">মই</span></span>
+        </a>
+
+        <nav class="checkout-nav-links">
+          <a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+          <a href="#"><i class="fa-solid fa-book"></i> All Books</a>
+          <a href="#"><i class="fa-solid fa-headset"></i> Support</a>
+        </nav>
+
+        <div
+          class="nav-actions"
+          style="display: flex; align-items: center; gap: 20px"
+        >
+          <div class="secure-badge-header">
+            <i class="fa-solid fa-shield-halved"></i> 100% Secure
+          </div>
+          <a href="cart.html" class="btn btn-outline-primary btn-small">
+            <i class="fa-solid fa-arrow-left"></i> Back to Cart
+          </a>
+        </div>
+      </div>
+    </header>
+
+    <main class="section-padding">
+      <div class="container">
+        <div class="checkout-progress-container">
+          <div class="checkout-progress">
+            <div class="progress-step active" data-step="1">
+              <div class="step-circle">
+                <i class="fa-solid fa-check check-icon"></i
+                ><span class="num">1</span>
+              </div>
+              <div class="step-label">Address</div>
+            </div>
+            <div class="progress-line"></div>
+            <div class="progress-step" data-step="2">
+              <div class="step-circle">
+                <i class="fa-solid fa-check check-icon"></i
+                ><span class="num">2</span>
+              </div>
+              <div class="step-label">Delivery</div>
+            </div>
+            <div class="progress-line"></div>
+            <div class="progress-step" data-step="3">
+              <div class="step-circle">
+                <i class="fa-solid fa-check check-icon"></i
+                ><span class="num">3</span>
+              </div>
+              <div class="step-label">Payment</div>
+            </div>
+            <div class="progress-line"></div>
+            <div class="progress-step" data-step="4">
+              <div class="step-circle">
+                <i class="fa-solid fa-check check-icon"></i
+                ><span class="num">4</span>
+              </div>
+              <div class="step-label">Verify</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="checkout-layout">
+          <div class="checkout-forms">
+            <!-- STEP 1: ADDRESS -->
+            <div class="checkout-step-content active" id="step-1">
+              <h2 class="step-main-title">Shipping & Contact Information</h2>
+              <p class="step-subtitle">
+                Step 1 of 3: Enter your recipient and delivery contact details
+              </p>
+
+              <form class="address-form">
+                <div class="form-row">
+                  <div class="form-group">
+                    <label>FIRST NAME *</label>
+                    <input
+                      type="text"
+                      id="f-name"
+                      placeholder="e.g. Arman"
+                      required
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label>LAST NAME</label>
+                    <input type="text" id="l-name" placeholder="e.g. Hossain" />
+                  </div>
+                </div>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label>MOBILE PHONE *</label>
+                    <input
+                      type="tel"
+                      id="phone"
+                      placeholder="01712345678"
+                      required
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label
+                      >EMAIL ADDRESS
+                      <span class="text-muted">(optional)</span></label
+                    >
+                    <input
+                      type="email"
+                      id="email"
+                      placeholder="you@example.com"
+                    />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label>STREET ADDRESS *</label>
+                  <input
+                    type="text"
+                    id="address"
+                    placeholder="House 42, Road 11, Banani"
+                    required
+                  />
+                </div>
+                <div class="form-row">
+                  <div class="form-group">
+                    <label>CITY *</label>
+                    <input type="text" id="city" placeholder="Dhaka" required />
+                  </div>
+                  <div class="form-group">
+                    <label>POSTAL CODE</label>
+                    <input type="text" id="zip" placeholder="1213" />
+                  </div>
+                </div>
+                <button
+                  type="button"
+                  class="btn btn-primary full-width mt-20"
+                  id="btn-next-1"
+                >
+                  CONTINUE TO DELIVERY AREA
+                  <i class="fa-solid fa-angle-right"></i>
+                </button>
+              </form>
+            </div>
+
+            <!-- STEP 2: DELIVERY -->
+            <div class="checkout-step-content" id="step-2">
+              <div class="info-summary-box">
+                <div class="summary-details">
+                  <span class="summary-label">DELIVERING TO</span>
+                  <h4 id="sum-name-phone">Name • Phone</h4>
+                  <p id="sum-full-address">Address, City, Zip</p>
+                </div>
+                <button class="edit-btn" onclick="goToStep(1)">EDIT</button>
+              </div>
+
+              <h2 class="step-main-title">Select Delivery Area</h2>
+
+              <div class="selection-cards">
+                <label class="premium-radio-card">
+                  <input type="radio" name="delivery_area" value="70" checked />
+                  <div class="card-content">
+                    <div class="card-text">
+                      <h4>INSIDE DHAKA CITY</h4>
+                      <p>1-2 Business Days</p>
+                    </div>
+                    <div class="card-price">৳70</div>
+                  </div>
+                </label>
+
+                <label class="premium-radio-card">
+                  <input type="radio" name="delivery_area" value="130" />
+                  <div class="card-content">
+                    <div class="card-text">
+                      <h4>OUTSIDE DHAKA</h4>
+                      <p>2-4 Business Days across Bangladesh</p>
+                    </div>
+                    <div class="card-price">৳130</div>
+                  </div>
+                </label>
+              </div>
+
+              <div class="step-actions mt-40">
+                <button class="btn btn-outline" id="btn-back-1">BACK</button>
+                <button class="btn btn-primary" id="btn-next-2">
+                  CONTINUE TO PAYMENT METHOD
+                  <i class="fa-solid fa-angle-right"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- STEP 3: PAYMENT -->
+            <div class="checkout-step-content" id="step-3">
+              <div class="dual-summary-boxes">
+                <div class="info-summary-box">
+                  <div class="summary-details">
+                    <span class="summary-label">ADDRESS</span>
+                    <h4 class="sum-name-phone-small">Name</h4>
+                    <p class="sum-city-small">City</p>
+                  </div>
+                  <button class="edit-btn" onclick="goToStep(1)">EDIT</button>
+                </div>
+                <div class="info-summary-box">
+                  <div class="summary-details">
+                    <span class="summary-label">DELIVERY OPTION</span>
+                    <h4 id="sum-delivery-type">Inside Dhaka City</h4>
+                    <p id="sum-delivery-price">৳70</p>
+                  </div>
+                  <button class="edit-btn" onclick="goToStep(2)">EDIT</button>
+                </div>
+              </div>
+
+              <h2 class="step-main-title">Choose Payment Option</h2>
+
+              <div class="selection-cards">
+                <label class="premium-radio-card">
+                  <input type="radio" name="payment_type" value="cod" checked />
+                  <div class="card-content">
+                    <div class="card-text">
+                      <h4>Cash on Delivery (COD)</h4>
+                      <p>Pay advance delivery fee online</p>
+                    </div>
+                    <div class="badge-gray">Delivery Charge Only</div>
+                  </div>
+                </label>
+
+                <label class="premium-radio-card">
+                  <input type="radio" name="payment_type" value="online" />
+                  <div class="card-content">
+                    <div class="card-text">
+                      <h4>Pay Now</h4>
+                      <p>Pay full amount online</p>
+                    </div>
+                    <div class="badge-red">Full Payment</div>
+                  </div>
+                </label>
+              </div>
+
+              <div class="step-actions mt-40">
+                <button class="btn btn-outline" id="btn-back-2">BACK</button>
+                <button class="btn btn-primary" id="btn-next-3">
+                  CONTINUE TO VERIFY <i class="fa-solid fa-angle-right"></i>
+                </button>
+              </div>
+            </div>
+
+            <!-- STEP 4: VERIFY PAYMENT -->
+            <div class="checkout-step-content" id="step-4">
+              <div class="selected-method-box">
+                <div class="method-info">
+                  <img
+                    src="https://seeklogo.com/images/B/bkash-logo-0C1572FBB4-seeklogo.com.png"
+                    alt="bKash"
+                    width="30"
+                  />
+                  <div>
+                    <span class="label">SELECTED METHOD</span>
+                    <h4>
+                      bKash
+                      <span
+                        class="text-muted"
+                        style="font-weight: 400; font-size: 14px"
+                        >(Personal Send Money)</span
+                      >
+                    </h4>
+                  </div>
+                </div>
+                <button class="edit-btn" onclick="goToStep(3)">CHANGE</button>
+              </div>
+
+              <div class="mini-tracker">
+                <div class="tracker-step">
+                  <i class="fa-solid fa-circle-check"></i> 1. Send Money
+                </div>
+                <div class="tracker-line"></div>
+                <div class="tracker-step">
+                  <i class="fa-solid fa-circle-check"></i> 2. Note TrxID
+                </div>
+                <div class="tracker-line"></div>
+                <div class="tracker-step active-step">
+                  <i class="fa-solid fa-circle"></i> 3. Verify
+                </div>
+              </div>
+
+              <div class="verify-payment-box">
+                <h3 class="verify-title">
+                  <span class="dark-circle">3</span> STEP 3: ENTER SENDER NUMBER
+                  & TRANSACTION ID
+                </h3>
+                <p class="verify-subtitle">
+                  Required by our accounts department to reconcile your payment
+                </p>
+
+                <div class="payment-target-box">
+                  <div>
+                    <span class="label">PAYMENT TARGET</span>
+                    <h4 id="dynamic-payment-amount">৳0 via bKash</h4>
+                    <p class="account-num">Account: 01715-825500</p>
+                  </div>
+                </div>
+
+                <form id="verification-form">
+                  <div class="form-row mt-20">
+                    <div class="form-group">
+                      <label>SENDER NUMBER LAST 4 DIGITS *</label>
+                      <input
+                        type="text"
+                        id="sender-num"
+                        placeholder="e.g. 5678"
+                        maxlength="4"
+                        required
+                      />
+                      <div class="input-hint">
+                        <i class="fa-regular fa-circle-xmark"></i> Last 4 digits
+                        are required
+                      </div>
+                    </div>
+                    <div class="form-group">
+                      <label>BKASH TRANSACTION ID *</label>
+                      <input
+                        type="text"
+                        id="trx-id"
+                        placeholder="E.G. TRX987654321"
+                        required
+                      />
+                      <div class="input-hint">
+                        <i class="fa-regular fa-circle-xmark"></i> Transaction
+                        ID is required
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="step-actions mt-40">
+                    <button
+                      type="button"
+                      class="btn btn-outline"
+                      onclick="goToStep(3)"
+                    >
+                      BACK TO STEP 2
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                      REVIEW ORDER <i class="fa-solid fa-angle-right"></i>
+                    </button>
+                  </div>
+                </form>
+              </div>
+
+              <!-- Success Message -->
+              <div
+                id="success-message"
+                style="display: none; text-align: center; padding: 40px 20px"
+              >
+                <i
+                  class="fa-solid fa-circle-check"
+                  style="font-size: 64px; color: #059669; margin-bottom: 20px"
+                ></i>
+                <h2
+                  style="
+                    font-size: 28px;
+                    color: var(--text-dark);
+                    margin-bottom: 12px;
+                  "
+                >
+                  Order Placed Successfully!
+                </h2>
+                <p
+                  style="
+                    color: var(--text-muted);
+                    font-size: 16px;
+                    margin-bottom: 30px;
+                  "
+                >
+                  Thank you for shopping with Boimoi. Your transaction is being
+                  verified.
+                </p>
+                <a href="index.html" class="btn btn-outline-primary"
+                  >Return to Home</a
+                >
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Side: Order Summary -->
+          <div class="order-summary-container">
+            <h3 class="summary-title">Your Order</h3>
+
+            <div class="mini-cart-items">
+              <div class="mini-item">
+                <img
+                  src="https://via.placeholder.com/50x75/e5e7eb/6b7280?text=Book"
+                  alt="Book"
+                />
+                <div class="mini-item-info">
+                  <h4>অন্ধকারের উৎসতে</h4>
+                  <p>Qty: 1</p>
+                </div>
+                <div class="mini-item-price">৳৪৫০</div>
+              </div>
+            </div>
+            <div class="summary-divider"></div>
+            <div class="summary-row">
+              <span>Subtotal</span>
+              <span>৳১৪৪৯</span>
+            </div>
+            <div class="summary-row">
+              <span>Shipping</span>
+              <span id="display-shipping-cost">৳70</span>
+            </div>
+            <div class="summary-divider"></div>
+            <div class="summary-row total-row">
+              <span>Total to Pay</span>
+              <span class="text-gold" id="display-total-cost">৳১৫১৯</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <script src="js/main.js"></script>
+  </body>
+</html>
