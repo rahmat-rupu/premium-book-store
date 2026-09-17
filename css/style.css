@@ -1245,6 +1245,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: opacity 0.3s ease-in-out; /* Added for premium smooth fade effect */
 }
 .zoom-btn {
   position: absolute;
@@ -1457,4 +1458,275 @@
 .trust-box small {
   color: var(--text-muted);
   font-weight: 400;
+}
+
+/* =========================================
+   Product Info Tabs
+========================================= */
+.product-tabs-section {
+  background-color: var(--bg-surface);
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 80px;
+  border: 1px solid var(--border-color);
+}
+
+/* Tab Header (Buttons) */
+.product-tabs-header {
+  display: flex;
+  gap: 32px;
+  border-bottom: 2px solid var(--border-color);
+  margin-bottom: 32px;
+}
+.tab-btn {
+  background: transparent;
+  border: none;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-muted);
+  padding: 12px 0;
+  cursor: pointer;
+  position: relative;
+  transition: var(--transition);
+  font-family: inherit;
+}
+.tab-btn:hover {
+  color: var(--primary-red);
+}
+.tab-btn.active {
+  color: var(--primary-red);
+}
+/* Premium Underline Animation for Active Tab */
+.tab-btn::after {
+  content: "";
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--primary-red);
+  transition: width 0.3s ease;
+}
+.tab-btn.active::after {
+  width: 100%;
+}
+
+/* Tab Content */
+.tab-pane {
+  display: none; /* Hide all by default */
+  animation: fadeIn 0.4s ease-in-out;
+}
+.tab-pane.active {
+  display: block; /* Show only active */
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.pane-title {
+  font-size: 22px;
+  color: var(--text-dark);
+  margin-bottom: 20px;
+}
+.tab-pane p {
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--text-muted);
+  margin-bottom: 16px;
+}
+
+/* Specification Table */
+.spec-table {
+  width: 100%;
+  max-width: 600px;
+  border-collapse: collapse;
+}
+.spec-table th,
+.spec-table td {
+  padding: 16px;
+  border-bottom: 1px solid var(--border-color);
+  text-align: left;
+  font-size: 16px;
+}
+.spec-table th {
+  color: var(--text-dark);
+  width: 35%;
+  font-weight: 600;
+  background-color: var(--bg-light-gray);
+  border-radius: 8px 0 0 8px; /* Slight rounding for a premium feel */
+}
+.spec-table td {
+  color: var(--text-muted);
+}
+
+/* Author Box */
+.author-info-box {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+  background-color: var(--bg-light-gray);
+  padding: 24px;
+  border-radius: 12px;
+}
+.author-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--bg-surface);
+  box-shadow: var(--shadow-sm);
+}
+.author-info-box h4 {
+  font-size: 18px;
+  margin-bottom: 12px;
+  color: var(--text-dark);
+}
+
+/* =========================================
+   Product Reviews Section
+========================================= */
+.product-reviews-section {
+  background-color: var(--bg-surface);
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 80px;
+  border: 1px solid var(--border-color);
+}
+.reviews-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 24px;
+  margin-bottom: 32px;
+}
+
+.reviews-container {
+  display: grid;
+  grid-template-columns: 1fr 2fr; /* Left summary, Right reviews */
+  gap: 60px;
+}
+
+/* Rating Summary */
+.average-rating {
+  text-align: center;
+  margin-bottom: 32px;
+}
+.average-rating h2 {
+  font-size: 64px;
+  color: var(--text-dark);
+  line-height: 1;
+  margin-bottom: 12px;
+}
+.average-rating .stars {
+  color: var(--accent-gold);
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+.average-rating p {
+  color: var(--text-muted);
+  font-size: 14px;
+}
+
+/* Rating Progress Bars */
+.rating-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.bar-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 14px;
+  color: var(--text-dark);
+  font-weight: 500;
+}
+.progress-bg {
+  flex-grow: 1;
+  height: 8px;
+  background-color: var(--bg-light-gray);
+  border-radius: 10px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background-color: var(--accent-gold);
+  border-radius: 10px;
+}
+
+/* Individual Review Cards */
+.review-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.review-card {
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border-color);
+}
+.review-card:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+.reviewer-info {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 12px;
+}
+.reviewer-avatar {
+  width: 48px;
+  height: 48px;
+  background-color: var(--primary-red);
+  color: var(--bg-surface);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  font-weight: 700;
+}
+.reviewer-name {
+  font-size: 16px;
+  color: var(--text-dark);
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.verified-badge {
+  color: #059669; /* Trust Green */
+  font-size: 12px;
+  font-weight: 500;
+  background: rgba(5, 150, 105, 0.1);
+  padding: 2px 8px;
+  border-radius: 20px;
+}
+.review-date {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+.review-stars {
+  color: var(--accent-gold);
+  font-size: 14px;
+  margin-bottom: 12px;
+}
+.review-title {
+  font-size: 18px;
+  color: var(--text-dark);
+  margin-bottom: 8px;
+}
+.review-text {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text-muted);
 }
