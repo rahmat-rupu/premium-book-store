@@ -2484,3 +2484,35 @@
   align-items: center;
   gap: 4px;
 }
+
+/* =========================================
+   Premium Toast Notification
+========================================= */
+.premium-toast {
+  position: fixed;
+  bottom: 30px;
+  right: -400px; /* Hidden off-screen initially */
+  background-color: var(--text-dark);
+  color: var(--bg-surface);
+  padding: 16px 24px;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-weight: 500;
+  font-size: 15px;
+  z-index: 9999;
+  transition: right 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55); /* Bouncy slide effect */
+  border-left: 4px solid #059669; /* Success green border */
+}
+.premium-toast.show {
+  right: 30px; /* Slide into view */
+}
+.premium-toast i {
+  color: #059669;
+  font-size: 20px;
+}
+.premium-toast b {
+  color: var(--accent-gold);
+}

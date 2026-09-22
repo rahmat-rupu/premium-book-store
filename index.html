@@ -78,10 +78,36 @@
 
         <!-- User Actions -->
         <div class="nav-actions">
-          <a href="#" class="action-icon" title="Wishlist">
+          <!-- Wishlist Icon with Badge -->
+          <a
+            href="wishlist.html"
+            class="action-icon"
+            title="Wishlist"
+            style="position: relative"
+          >
             <i class="fa-regular fa-heart"></i>
+            <span
+              class="wishlist-badge"
+              style="
+                position: absolute;
+                top: -5px;
+                right: -8px;
+                background: #8b1538;
+                color: white;
+                font-size: 11px;
+                font-weight: 700;
+                width: 18px;
+                height: 18px;
+                border-radius: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                transition: all 0.3s ease;
+              "
+              >০</span
+            >
           </a>
-          <a href="#" class="action-icon cart-icon" title="Cart">
+          <a href="cart.html" class="action-icon cart-icon" title="Cart">
             <i class="fa-solid fa-bag-shopping"></i>
             <span class="cart-badge">0</span>
           </a>
@@ -1284,5 +1310,108 @@
         </div>
       </div>
     </footer>
+    <script src="js/main.js"></script>
+    <!-- Direct Wishlist Script for Homepage -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        // ১. ফেভারিট ব্যাজ আপডেট করার ফাংশন
+        function updateWishlistBadge() {
+          let currentWishlist =
+            JSON.parse(localStorage.getItem("boimoi_wishlist")) || [];
+          let total = currentWishlist.length;
+          const engToBen = {
+            0: "০",
+            1: "১",
+            2: "২",
+            3: "৩",
+            4: "৪",
+            5: "৫",
+            6: "৬",
+            7: "৭",
+            8: "৮",
+            9: "৯",
+          };
+          let benNum = total.toString().replace(/[0-9]/g, (m) => engToBen[m]);
+
+          document.querySelectorAll(".wishlist-badge").forEach((badge) => {
+            if (total > 0) {
+              badge.style.display = "flex";
+              badge.innerText = benNum;
+              badge.style.transform = "scale(1.3)";
+              setTimeout(() => (badge.style.transform = "scale(1)"), 200);
+            } else {
+              badge.style.display = "none"; // ফাঁকা থাকলে লুকানো থাকবে
+            }
+          });
+        }
+        updateWishlistBadge(); // পেজ লোড হলেই রান করবে
+
+        // ২. হার্ট বাটনে ক্লিক ইভেন্ট
+        document.body.addEventListener("click", function (e) {
+          // বাটনটি খুঁজে বের করা (যেকোনো icon-btn যার ভেতরে heart আছে)
+          const loveBtn =
+            e.target.closest(".icon-btn") || e.target.closest(".wishlist-btn");
+
+          if (loveBtn && loveBtn.innerHTML.includes("fa-heart")) {
+            e.preventDefault();
+
+            const card = loveBtn.closest(".book-card");
+            if (!card) return;
+
+            const titleEl = card.querySelector(".book-title");
+            const title = titleEl ? titleEl.innerText.trim() : "Unknown Book";
+
+            const priceEl = card.querySelector(".current-price");
+            const priceText = priceEl ? priceEl.innerText.trim() : "0";
+
+            const imgEl =
+              card.querySelector(".book-cover") || card.querySelector("img");
+            const img = imgEl ? imgEl.src : "https://via.placeholder.com/150";
+
+            const id = title.replace(/\s+/g, "-").toLowerCase();
+            const icon = loveBtn.querySelector("i");
+
+            let currentWishlist =
+              JSON.parse(localStorage.getItem("boimoi_wishlist")) || [];
+            const existingIndex = currentWishlist.findIndex(
+              (item) => item.id === id,
+            );
+
+            if (existingIndex > -1) {
+              // আগে থেকেই থাকলে রিমুভ করবে
+              currentWishlist.splice(existingIndex, 1);
+              if (icon) {
+                icon.classList.remove("fa-solid");
+                icon.classList.add("fa-regular");
+                icon.style.color = "";
+              }
+            } else {
+              // না থাকলে অ্যাড করবে এবং ছবি/দাম সহ সেভ করবে
+              currentWishlist.push({ id, title, priceText, img });
+              if (icon) {
+                icon.classList.remove("fa-regular");
+                icon.classList.add("fa-solid");
+                icon.style.color = "#8B1538";
+              }
+
+              // সুন্দর টোস্ট পপ-আপ মেসেজ
+              let toast = document.createElement("div");
+              toast.style.cssText =
+                "position:fixed; bottom:90px; right:30px; background:#1A1A1A; color:#fff; padding:16px 24px; border-radius:8px; border-left:4px solid #8B1538; z-index:9999; box-shadow:0 10px 30px rgba(0,0,0,0.2); display:flex; align-items:center; gap:10px; font-family:inherit;";
+              toast.innerHTML = `<i class="fa-solid fa-heart" style="color:#8B1538; font-size:20px;"></i> <span><b style="color:#D4AF37">${title}</b> ফেভারিটে যুক্ত হয়েছে!</span>`;
+              document.body.appendChild(toast);
+              setTimeout(() => toast.remove(), 3000);
+            }
+
+            // লোকাল স্টোরেজে সেভ এবং ব্যাজ আপডেট
+            localStorage.setItem(
+              "boimoi_wishlist",
+              JSON.stringify(currentWishlist),
+            );
+            updateWishlistBadge();
+          }
+        });
+      });
+    </script>
   </body>
 </html>
