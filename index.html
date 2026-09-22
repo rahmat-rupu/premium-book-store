@@ -1413,5 +1413,643 @@
         });
       });
     </script>
+
+    <!-- =========================================
+         Premium Auth Modal (Login & Sign Up)
+    ========================================= -->
+    <style>
+      .auth-modal-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(15, 23, 42, 0.4);
+        backdrop-filter: blur(8px); /* Background Blur Effect */
+        -webkit-backdrop-filter: blur(8px);
+        z-index: 999999;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+      }
+      .auth-modal-overlay.active {
+        opacity: 1;
+        visibility: visible;
+      }
+      .auth-modal-box {
+        background: #ffffff;
+        width: 100%;
+        max-width: 420px;
+        border-radius: 20px;
+        padding: 40px 32px;
+        position: relative;
+        transform: translateY(30px) scale(0.95);
+        transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+        box-shadow: 0 24px 50px rgba(0, 0, 0, 0.15);
+      }
+      .auth-modal-overlay.active .auth-modal-box {
+        transform: translateY(0) scale(1);
+      }
+      .auth-close-btn {
+        position: absolute;
+        top: 16px;
+        right: 16px;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        background: #f3f4f6;
+        border: none;
+        color: #6b7280;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: 0.2s;
+      }
+      .auth-close-btn:hover {
+        background: #e5e7eb;
+        color: #1a1a1a;
+      }
+      .auth-header {
+        text-align: center;
+        margin-bottom: 24px;
+      }
+      .auth-tabs {
+        display: flex;
+        background: #f3f4f6;
+        padding: 4px;
+        border-radius: 10px;
+        margin-bottom: 24px;
+      }
+      .auth-tab-btn {
+        flex: 1;
+        padding: 10px 0;
+        border: none;
+        background: transparent;
+        font-weight: 600;
+        font-size: 15px;
+        color: #6b7280;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: 0.3s;
+      }
+      .auth-tab-btn.active {
+        background: #fff;
+        color: #1a1a1a;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      }
+      .auth-form {
+        display: none;
+        animation: fadeIn 0.3s ease;
+      }
+      .auth-form.active {
+        display: block;
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(5px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      .auth-input-group {
+        margin-bottom: 16px;
+        text-align: left;
+      }
+      .auth-input-group label {
+        display: block;
+        font-size: 13px;
+        font-weight: 600;
+        margin-bottom: 6px;
+        color: #4b5563;
+      }
+      .auth-input-group input {
+        width: 100%;
+        padding: 12px 16px;
+        border: 1.5px solid #e5e7eb;
+        border-radius: 10px;
+        font-size: 14px;
+        transition: 0.3s;
+        outline: none;
+        font-family: inherit;
+      }
+      .auth-input-group input:focus {
+        border-color: var(--primary-red);
+        box-shadow: 0 0 0 4px rgba(139, 21, 56, 0.1);
+      }
+      .auth-divider {
+        display: flex;
+        align-items: center;
+        margin: 24px 0;
+        color: #9ca3af;
+        font-size: 13px;
+        font-weight: 500;
+      }
+      .auth-divider::before,
+      .auth-divider::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: #e5e7eb;
+      }
+      .auth-divider span {
+        padding: 0 12px;
+      }
+    </style>
+
+    <div class="auth-modal-overlay" id="authModal">
+      <div class="auth-modal-box">
+        <button class="auth-close-btn" id="closeAuthModal" title="Close">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <div class="auth-header">
+          <h2
+            style="
+              font-size: 28px;
+              font-weight: 700;
+              color: var(--primary-red);
+              margin-bottom: 4px;
+            "
+          >
+            বই<span style="color: var(--accent-gold)">মই</span>
+          </h2>
+          <p style="font-size: 14px; color: #6b7280">
+            আপনার অ্যাকাউন্টে প্রবেশ করুন
+          </p>
+        </div>
+
+        <div class="auth-tabs">
+          <button class="auth-tab-btn active" data-target="loginForm">
+            লগইন
+          </button>
+          <button class="auth-tab-btn" data-target="signupForm">
+            রেজিস্ট্রেশন
+          </button>
+        </div>
+
+        <!-- Login Form -->
+        <form id="loginForm" class="auth-form active">
+          <div class="auth-input-group">
+            <label>ইমেইল বা ফোন নাম্বার</label>
+            <input type="text" placeholder="example@email.com" required />
+          </div>
+          <div class="auth-input-group">
+            <label>পাসওয়ার্ড</label>
+            <input type="password" placeholder="••••••••" required />
+          </div>
+          <div style="text-align: right; margin-bottom: 20px">
+            <a
+              href="#"
+              style="
+                color: var(--primary-red);
+                font-size: 13px;
+                font-weight: 600;
+                text-decoration: none;
+              "
+              >পাসওয়ার্ড ভুলে গেছেন?</a
+            >
+          </div>
+          <button
+            type="button"
+            class="btn btn-primary"
+            style="width: 100%; justify-content: center; border-radius: 10px"
+          >
+            লগইন করুন
+          </button>
+        </form>
+
+        <!-- Signup Form -->
+        <form id="signupForm" class="auth-form">
+          <div class="auth-input-group">
+            <label>আপনার নাম</label>
+            <input type="text" placeholder="e.g. Arman Hossain" required />
+          </div>
+          <div class="auth-input-group">
+            <label>ইমেইল বা ফোন নাম্বার</label>
+            <input type="text" placeholder="example@email.com" required />
+          </div>
+          <div class="auth-input-group">
+            <label>পাসওয়ার্ড তৈরি করুন</label>
+            <input type="password" placeholder="••••••••" required />
+          </div>
+          <button
+            type="button"
+            onclick="processSignupAction()"
+            class="btn btn-primary"
+            style="
+              width: 100%;
+              justify-content: center;
+              border-radius: 10px;
+              margin-top: 10px;
+            "
+          >
+            অ্যাকাউন্ট খুলুন
+          </button>
+        </form>
+
+        <div class="auth-divider"><span>অথবা</span></div>
+
+        <button
+          class="btn btn-outline"
+          style="
+            width: 100%;
+            justify-content: center;
+            border-radius: 10px;
+            gap: 10px;
+            font-weight: 600;
+            border-color: #e5e7eb;
+            color: #374151;
+          "
+        >
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg"
+            alt="Google"
+            width="18"
+          />
+          Google দিয়ে কন্টিনিউ করুন
+        </button>
+      </div>
+    </div>
+
+    <!-- Script to Handle the Modal -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const authModal = document.getElementById("authModal");
+        const closeBtn = document.getElementById("closeAuthModal");
+        const tabBtns = document.querySelectorAll(".auth-tab-btn");
+        const authForms = document.querySelectorAll(".auth-form");
+
+        // Smart logic to detect clicks on ANY login/signup buttons across your page
+        document.body.addEventListener("click", function (e) {
+          const target = e.target.closest("a, button");
+          if (!target) return;
+
+          const text = target.innerText.toLowerCase();
+          const href = target.getAttribute("href") || "";
+
+          // Jodi button er naame 'login', 'sign up' ba banglay 'লগইন' thake
+          if (
+            text.includes("login") ||
+            text.includes("sign up") ||
+            text.includes("signup") ||
+            text.includes("লগইন") ||
+            href.includes("login")
+          ) {
+            e.preventDefault();
+            authModal.classList.add("active");
+            document.body.style.overflow = "hidden"; // Background scroll bondho kora
+
+            // Click kora button onujayi Sign up naki Login tab open hobe sheta set kora
+            if (text.includes("sign up") || text.includes("রেজিস্ট্রেশন")) {
+              switchTab("signupForm");
+            } else {
+              switchTab("loginForm");
+            }
+          }
+        });
+
+        // Modal Close Korar Logic
+        closeBtn.addEventListener("click", closeModal);
+        authModal.addEventListener("click", function (e) {
+          if (e.target === authModal) closeModal(); // Baire click korle off hoye jabe
+        });
+
+        function closeModal() {
+          authModal.classList.remove("active");
+          document.body.style.overflow = "auto"; // Scroll abar on kora
+        }
+
+        // Tab Switch (Login theke Sign Up e jaoa)
+        tabBtns.forEach((btn) => {
+          btn.addEventListener("click", function () {
+            const targetId = this.getAttribute("data-target");
+            switchTab(targetId);
+          });
+        });
+
+        function switchTab(targetId) {
+          tabBtns.forEach((b) => b.classList.remove("active"));
+          authForms.forEach((f) => f.classList.remove("active"));
+
+          const targetBtn = document.querySelector(
+            `.auth-tab-btn[data-target="${targetId}"]`,
+          );
+          const targetForm = document.getElementById(targetId);
+
+          if (targetBtn) targetBtn.classList.add("active");
+          if (targetForm) targetForm.classList.add("active");
+
+          // Form hishebe title change kora
+          const headerDesc = authModal.querySelector(".auth-header p");
+          if (targetId === "signupForm") {
+            headerDesc.innerText = "নতুন অ্যাকাউন্ট তৈরি করুন";
+          } else {
+            headerDesc.innerText = "আপনার অ্যাকাউন্টে প্রবেশ করুন";
+          }
+        }
+      });
+    </script>
+
+    <!-- =========================================
+         Premium Auth Modal (Direct OnClick Edition)
+    ========================================= -->
+    <div class="auth-modal-overlay" id="authModal">
+      <div class="auth-modal-box">
+        <button
+          class="auth-close-btn"
+          onclick="closeAuthModalWindow()"
+          title="Close"
+        >
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <div class="auth-header">
+          <h2
+            style="
+              font-size: 28px;
+              font-weight: 700;
+              color: var(--primary-red);
+              margin-bottom: 4px;
+            "
+          >
+            বই<span style="color: var(--accent-gold)">মই</span>
+          </h2>
+          <p style="font-size: 14px; color: #6b7280" id="authDesc">
+            আপনার অ্যাকাউন্টে প্রবেশ করুন
+          </p>
+        </div>
+
+        <div class="auth-tabs">
+          <button
+            type="button"
+            onclick="
+              localStorage.setItem('boimoi_user', 'User');
+              window.location.reload();
+            "
+            class="btn btn-primary"
+            style="width: 100%; justify-content: center; border-radius: 10px"
+          >
+            লগইন করুন
+          </button>
+          <button
+            class="auth-tab-btn"
+            id="tabSignupBtn"
+            onclick="switchAuthTab('signupForm')"
+          >
+            রেজিস্ট্রেশন
+          </button>
+        </div>
+
+        <!-- Login Form -->
+        <form id="loginForm" class="auth-form active">
+          <div class="auth-input-group">
+            <label>ইমেইল বা ফোন নাম্বার</label>
+            <input
+              type="text"
+              id="loginEmail"
+              placeholder="example@email.com"
+              required
+            />
+          </div>
+          <div class="auth-input-group">
+            <label>পাসওয়ার্ড</label>
+            <input type="password" placeholder="••••••••" required />
+          </div>
+          <div style="text-align: right; margin-bottom: 20px">
+            <a
+              href="#"
+              style="
+                color: var(--primary-red);
+                font-size: 13px;
+                font-weight: 600;
+                text-decoration: none;
+              "
+              >পাসওয়ার্ড ভুলে গেছেন?</a
+            >
+          </div>
+          <!-- Direct OnClick added here -->
+          <button
+            type="button"
+            onclick="processLoginAction()"
+            class="btn btn-primary"
+            style="width: 100%; justify-content: center; border-radius: 10px"
+          >
+            লগইন করুন
+          </button>
+        </form>
+
+        <!-- Signup Form -->
+        <form id="signupForm" class="auth-form">
+          <div class="auth-input-group">
+            <label>আপনার নাম</label>
+            <input
+              type="text"
+              id="signupName"
+              placeholder="e.g. Arman Hossain"
+              required
+            />
+          </div>
+          <div class="auth-input-group">
+            <label>ইমেইল বা ফোন নাম্বার</label>
+            <input
+              type="text"
+              id="signupEmail"
+              placeholder="example@email.com"
+              required
+            />
+          </div>
+          <div class="auth-input-group">
+            <label>পাসওয়ার্ড তৈরি করুন</label>
+            <input type="password" placeholder="••••••••" required />
+          </div>
+          <!-- Direct OnClick added here -->
+          <button
+            type="button"
+            onclick="
+              localStorage.setItem(
+                'boimoi_user',
+                document.getElementById('signupName').value || 'Customer',
+              );
+              window.location.reload();
+            "
+            class="btn btn-primary"
+            style="
+              width: 100%;
+              justify-content: center;
+              border-radius: 10px;
+              margin-top: 10px;
+            "
+          >
+            অ্যাকাউন্ট খুলুন
+          </button>
+        </form>
+
+        <div class="auth-divider"><span>অথবা</span></div>
+
+        <button
+          class="btn btn-outline"
+          style="
+            width: 100%;
+            justify-content: center;
+            border-radius: 10px;
+            gap: 10px;
+            font-weight: 600;
+            border-color: #e5e7eb;
+            color: #374151;
+          "
+        >
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg"
+            alt="Google"
+            width="18"
+          />
+          Google দিয়ে কন্টিনিউ করুন
+        </button>
+      </div>
+    </div>
+
+    <!-- Script: Global Functions for 100% Guarantee -->
+    <script>
+      // 1. Profile Badge Update Function
+      window.updateProfileUI = function () {
+        const userName = localStorage.getItem("boimoi_user");
+        const loginLinks = document.querySelectorAll(
+          ".login-link, .user-profile-badge",
+        );
+
+        if (userName && loginLinks.length > 0) {
+          const initial = userName.charAt(0).toUpperCase();
+          const badgeHtml = `
+                    <div class="user-profile-badge" onclick="processLogoutAction()" style="display: flex; align-items: center; gap: 8px; cursor: pointer; padding: 4px 16px 4px 4px; background: #FDFBF7; border-radius: 50px; border: 1px solid #E5E7EB; color: var(--text-dark); font-weight: 600; font-size: 14px; position: relative;">
+                        <div style="width: 32px; height: 32px; border-radius: 50%; background: var(--primary-red); color: white; display: flex; justify-content: center; align-items: center; font-size: 15px; font-weight: 700;">${initial}</div>
+                        <span>${userName}</span>
+                    </div>
+                `;
+          loginLinks.forEach((link) => {
+            link.outerHTML = badgeHtml;
+          });
+        } else if (!userName && loginLinks.length > 0) {
+          loginLinks.forEach((link) => {
+            if (link.classList.contains("user-profile-badge")) {
+              link.outerHTML = `<a href="#" class="login-link" style="font-weight: 600; text-decoration: none; color: var(--primary-red);">Login</a>`;
+            }
+          });
+        }
+      };
+
+      // Run UI Check on Page Load
+      updateProfileUI();
+
+      // 2. Global Toast Message Function
+      window.showGlobalToast = function (msg, color) {
+        let toast = document.createElement("div");
+        toast.style.cssText = `position:fixed; bottom:90px; right:30px; background:#1A1A1A; color:#fff; padding:16px 24px; border-radius:8px; border-left:4px solid ${color}; z-index:9999999; display:flex; align-items:center; gap:10px; box-shadow:0 10px 30px rgba(0,0,0,0.2); font-family:inherit;`;
+        toast.innerHTML = msg;
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 3000);
+      };
+
+      // 3. Modal Control Functions
+      window.closeAuthModalWindow = function () {
+        const modal = document.getElementById("authModal");
+        if (modal) {
+          modal.classList.remove("active");
+          document.body.style.overflow = "auto";
+        }
+      };
+
+      window.openAuthModalWindow = function (isSignup = false) {
+        const modal = document.getElementById("authModal");
+        if (modal) {
+          modal.classList.add("active");
+          document.body.style.overflow = "hidden";
+          if (isSignup) {
+            switchAuthTab("signupForm");
+          } else {
+            switchAuthTab("loginForm");
+          }
+        }
+      };
+
+      window.switchAuthTab = function (targetId) {
+        document
+          .querySelectorAll(".auth-tab-btn")
+          .forEach((b) => b.classList.remove("active"));
+        document
+          .querySelectorAll(".auth-form")
+          .forEach((f) => f.classList.remove("active"));
+
+        if (targetId === "loginForm") {
+          document.getElementById("tabLoginBtn").classList.add("active");
+          document.getElementById("authDesc").innerText =
+            "আপনার অ্যাকাউন্টে প্রবেশ করুন";
+        } else {
+          document.getElementById("tabSignupBtn").classList.add("active");
+          document.getElementById("authDesc").innerText =
+            "নতুন অ্যাকাউন্ট তৈরি করুন";
+        }
+
+        document.getElementById(targetId).classList.add("active");
+      };
+
+      // 4. ACTION FUNCTIONS (These trigger when buttons are clicked)
+      window.processSignupAction = function () {
+        let nameInput = document.getElementById("signupName");
+        let name =
+          nameInput && nameInput.value.trim() !== ""
+            ? nameInput.value.trim()
+            : "Customer";
+
+        localStorage.setItem("boimoi_user", name);
+        closeAuthModalWindow();
+        updateProfileUI();
+        showGlobalToast(
+          `<i class="fa-solid fa-circle-check" style="color:#059669;"></i> <span>স্বাগতম, <b style="color:#D4AF37">${name}</b>!</span>`,
+          "#059669",
+        );
+      };
+
+      window.processLoginAction = function () {
+        let emailInput = document.getElementById("loginEmail");
+        let email =
+          emailInput && emailInput.value.trim() !== ""
+            ? emailInput.value.trim()
+            : "";
+        let name = email ? email.split("@")[0] : "User";
+
+        localStorage.setItem("boimoi_user", name);
+        closeAuthModalWindow();
+        updateProfileUI();
+        showGlobalToast(
+          `<i class="fa-solid fa-circle-check" style="color:#059669;"></i> <span>লগইন সফল হয়েছে!</span>`,
+          "#059669",
+        );
+      };
+
+      window.processLogoutAction = function () {
+        localStorage.removeItem("boimoi_user");
+        updateProfileUI();
+        showGlobalToast(
+          '<i class="fa-solid fa-right-from-bracket" style="color:#EAB308;"></i> <span>লগ আউট সফল হয়েছে!</span>',
+          "#EAB308",
+        );
+      };
+
+      // Open modal when any "login-link" is clicked
+      document.body.addEventListener("click", function (e) {
+        const openBtn = e.target.closest(".login-link");
+        if (openBtn) {
+          e.preventDefault();
+          openAuthModalWindow(false);
+        }
+      });
+    </script>
   </body>
 </html>
